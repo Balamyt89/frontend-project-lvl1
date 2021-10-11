@@ -21,6 +21,7 @@
   "type": "module",
   "homepage": "https://github.com/Balamyt89/frontend-project-lvl1#readme",
   "dependencies": {
+    "eslint": "^8.0.0",
     "readline-sync": "^1.4.10"
   }
 }
