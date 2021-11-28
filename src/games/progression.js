@@ -6,7 +6,7 @@ const progressionLength = getRandomInt(5, 10);
 
 const getProgression = (start, step, length = progressionLength) => {
   const progressions = [];
-  for (let i = 0; i < length; i += 1) {
+  for (let i = 1; i < length; i += 1) {
     progressions.push(start + step * i);
   }
   return progressions;
