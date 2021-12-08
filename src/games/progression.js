@@ -2,35 +2,29 @@ import getRandomInt from '../utilities.js';
 import startNewGame from '../index.js';
 
 const description = 'What number is missing in the progression?';
-const progressionLength = getRandomInt(6, 10);
 
-const getProgression = (start, step, length = progressionLength) => {
-  const progressions = [];
-  for (let i = 1; i < length; i += 1) {
-    progressions.push(start + step * i);
-  }
-  return progressions;
-};
+const generateProgression = (numberOfElements, progressionBase, firstElement) => {
+  const progressionNumbers = [firstElement];
 
-const generateQuestion = (arr, index) => {
-  const result = [];
-  for (let item = 0; item < arr.length; item += 1) {
-    if (arr[item] === arr[index]) {
-      result.push('..');
-    } else {
-      result.push(arr[item]);
-    }
+  for (let i = 1; i < numberOfElements; i += 1) {
+    progressionNumbers.push(firstElement + i * progressionBase);
   }
-  return result.join(' ');
+
+  return progressionNumbers;
 };
 
 const generateQuestionAnswer = () => {
-  const progressions = getProgression(getRandomInt(0, 100), getRandomInt(0, 100));
-  const hiddenItem = getRandomInt(1, progressionLength - 1);
+  const numberOfElements = getRandomInt(5, 10);
+  const progressionBase = getRandomInt(1, 5);
+  const firstElement = getRandomInt(0, 100);
+  const progressionNumbers = generateProgression(numberOfElements, progressionBase, firstElement);
+  const randomMissingElementIndex = getRandomInt(0, numberOfElements - 1);
 
-  const answer = progressions[hiddenItem].toString();
+  const answer = String(progressionNumbers[randomMissingElementIndex]);
 
-  const question = generateQuestion(progressions, hiddenItem);
+  progressionNumbers[randomMissingElementIndex] = '..';
+
+  const question = progressionNumbers.join(' ');
 
   return [question, answer];
 };
